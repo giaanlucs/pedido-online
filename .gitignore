@@ -1,0 +1,15 @@
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Build
+bin/
+target/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# VSCode e outros
+.vscode/

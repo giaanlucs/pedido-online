@@ -1,0 +1,18 @@
+package pedidoonline;
+
+import pedidoonline.facade.PedidoFacade;
+import pedidoonline.model.Produto;
+import pedidoonline.singleton.Carrinho; 
+
+public class Main {
+    public static void main(String[] args) {
+        Carrinho carrinho = Carrinho.getInstancia();
+
+        carrinho.adicionarProduto(new Produto("Hamburguer", 25.0));
+        carrinho.adicionarProduto(new Produto("Refrigerante", 8.0));
+        carrinho.adicionarProduto(new Produto("Batata Frita", 12.0));
+
+        PedidoFacade sistema = new PedidoFacade();
+        sistema.fazerPedido("João da Silva");
+    }
+}

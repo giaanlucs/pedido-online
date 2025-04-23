@@ -1,0 +1,5 @@
+package pedidoonline.singleton;
+
+public class Carrinho {
+
+}

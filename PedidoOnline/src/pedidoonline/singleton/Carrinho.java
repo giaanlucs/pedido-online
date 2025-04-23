@@ -1,0 +1,36 @@
+package pedidoonline.singleton;
+
+import java.util.ArrayList;
+import java.util.List;
+import pedidoonline.model.Produto;
+
+public class Carrinho {
+    private static Carrinho instancia;
+    private List<Produto> produtos = new ArrayList<>();
+
+    private Carrinho() {}
+
+    public static Carrinho getInstancia() {
+        if (instancia == null) {
+            instancia = new Carrinho();
+        }
+        return instancia;
+    }
+
+    public void adicionarProduto(Produto produto) {
+        produtos.add(produto);
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void limpar() {
+        produtos.clear();
+    }
+
+    public double getTotal() {
+        return produtos.stream().mapToDouble(Produto::getPreco).sum();
+    }
+}
+

@@ -1,0 +1,62 @@
+package pedidoonline;
+
+import pedidoonline.singleton.Carrinho;
+import pedidoonline.model.Produto;
+import pedidoonline.facade.PedidoFacade;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Carrinho carrinho = Carrinho.getInstancia();
+
+        // Listar os produtos disponíveis
+        Produto[] produtosDisponiveis = new Produto[] {
+            new Produto("Hamburguer", 25.0),
+            new Produto("Refrigerante", 8.0),
+            new Produto("Batata Frita", 12.0),
+            new Produto("Pizza", 40.0),
+            new Produto("Sorvete", 15.0)
+        };
+
+        System.out.println("Bem-vindo ao sistema de pedido online!");
+        System.out.println("Escolha os produtos que você deseja adicionar ao seu carrinho:");
+
+        // Exibir os produtos disponíveis
+        for (int i = 0; i < produtosDisponiveis.length; i++) {
+            System.out.println((i + 1) + ". " + produtosDisponiveis[i].getNome() + " - R$ " + produtosDisponiveis[i].getPreco());
+        }
+
+        // Opção para adicionar produtos ao carrinho
+        while (true) {
+            System.out.println("\nDigite o número do produto para adicionar ao carrinho (ou 0 para finalizar):");
+            int opcao = scanner.nextInt();
+
+            if (opcao == 0) {
+                break;
+            }
+
+            if (opcao > 0 && opcao <= produtosDisponiveis.length) {
+                Produto produtoEscolhido = produtosDisponiveis[opcao - 1];
+                carrinho.adicionarProduto(produtoEscolhido);
+                System.out.println(produtoEscolhido.getNome() + " adicionado ao carrinho.");
+            } else {
+                System.out.println("Opção inválida! Tente novamente.");
+            }
+        }
+
+        // Exibir os itens do carrinho e o total
+        System.out.println("\nResumo do seu pedido:");
+        for (Produto produto : carrinho.getProdutos()) {
+            System.out.println("- " + produto.getNome() + " - R$ " + produto.getPreco());
+        }
+        System.out.println("\nTotal: R$ " + carrinho.getTotal());
+
+        // Finalizando o pedido
+        PedidoFacade sistema = new PedidoFacade();
+        sistema.fazerPedido("João da Silva");
+
+        scanner.close();
+    }
+}
+
